@@ -1,15 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
+  --font-roboto-flex: 'Roboto Flex', sans-serif;
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +16,81 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto-flex);
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-roboto-flex);
+  font-weight: 700;
+}
+
+.title-font {
+  font-family: var(--font-roboto-flex);
+  font-weight: 700;
+}
+
+.body-font {
+  font-family: var(--font-roboto-flex);
+  font-weight: 300;
+}
+
+/* Custom font utilities */
+.font-roboto-bold {
+  font-family: var(--font-roboto-flex);
+  font-weight: 700;
+}
+
+.font-roboto-extrabold {
+  font-family: var(--font-roboto-flex);
+  font-weight: 800;
+}
+
+.font-roboto-light {
+  font-family: var(--font-roboto-flex);
+  font-weight: 300;
+}
+
+/* Fix for SVG elements being unclickable */
+svg {
+  pointer-events: auto;
+}
+
+svg a,
+svg [role='button'] {
+  pointer-events: auto;
+}
+
+/* Ensure framer motion elements are clickable */
+[data-framer-motion] {
+  pointer-events: auto;
+}
+
+/* Fix button clickability */
+button {
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.interactive-element {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.interactive-element:hover {
+  transform: scale(1.05);
+}
+
+.muscle-part {
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 20;
 }
