@@ -123,27 +123,25 @@ export default function ArmsPage(): React.JSX.Element {
     <div className='min-h-screen bg-gradient-to-br from-blue-600 via-slate-900 to-blue-700 relative'>
       {/* Background Image with Overlay */}
       <div
-        className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+        className='absolute inset-0 responsive-bg-cover'
         style={{
           backgroundImage: "url('/images/ui/backgrounds/page.jpg')",
-          backgroundSize: '100% auto',
-          backgroundPosition: 'center top',
         }}
       />
       <div className='absolute inset-0 bg-gradient-to-br from-blue-600/85 via-slate-900/90 to-blue-700/85' />
 
-      <div className='relative z-10 container mx-auto px-4 py-12'>
+      <div className='relative z-10 responsive-container landscape-mobile-adjust'>
         {/* Header */}
         <motion.div
-          className='text-center mb-16'
+          className='text-center mb-8 sm:mb-12 lg:mb-16'
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className='text-6xl font-roboto-extrabold text-white mb-4 tracking-tight'>
+          <h1 className='responsive-heading-xl font-roboto-extrabold text-white mb-2 sm:mb-4 tracking-tight'>
             ARM WORKOUTS
           </h1>
-          <p className='text-lg font-roboto-light text-blue-100 max-w-xl mx-auto leading-relaxed'>
+          <p className='text-sm sm:text-lg font-roboto-light text-blue-100 max-w-xl mx-auto leading-relaxed px-4'>
             Biceps, triceps, why not both?
           </p>
         </motion.div>

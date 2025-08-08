@@ -131,11 +131,9 @@ export default function HomePage(): React.JSX.Element {
     <div className='min-h-screen relative bg-gray-900'>
       {/* Background Image with Overlay */}
       <div
-        className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+        className='absolute inset-0 responsive-bg-cover'
         style={{
           backgroundImage: "url('/images/ui/backgrounds/background.jpg')",
-          backgroundSize: '100% auto',
-          backgroundPosition: 'center top',
         }}
       />
 
@@ -143,36 +141,36 @@ export default function HomePage(): React.JSX.Element {
       <div className='relative z-10'>
         {/* Header */}
         <motion.header
-          className='text-center py-12'
+          className='text-center responsive-container landscape-mobile-adjust'
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className='text-6xl font-roboto-extrabold text-white mb-4 tracking-tight'>
+          <h1 className='responsive-heading-xl font-roboto-extrabold text-white mb-2 sm:mb-4 tracking-tight'>
             MUSCLE MEMORY
           </h1>
-          <p className='text-lg font-roboto-light text-gray-300 max-w-xl mx-auto leading-relaxed'>
+          <p className='text-sm sm:text-lg font-roboto-light text-gray-300 max-w-xl mx-auto leading-relaxed px-4'>
             Get stronger, be better.
           </p>
         </motion.header>
 
         {/* Main Content */}
-        <div className='container mx-auto px-6 pb-16'>
-          <div className='flex flex-col lg:flex-row items-center justify-center gap-16 max-w-6xl mx-auto'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-16 landscape-mobile-adjust'>
+          <div className='flex flex-col xl:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-16 max-w-7xl mx-auto'>
             {/* Muscle Groups Navigation - Left Side */}
             <motion.div
-              className='flex-1 max-w-md'
+              className='flex-1 w-full max-w-md xl:max-w-lg mobile-full-width'
               variants={containerVariants}
               initial='hidden'
               animate='visible'
             >
               <motion.h2
-                className='text-3xl font-roboto-bold text-white mb-8 text-center'
+                className='responsive-heading-lg font-roboto-bold text-white mb-6 sm:mb-8 text-center mobile-text-center'
                 variants={itemVariants}
               >
                 List of exercises
               </motion.h2>
-              <div className='space-y-4'>
+              <div className='space-y-3 sm:space-y-4 landscape-mobile-compact'>
                 {muscleGroups.map((group) => (
                   <motion.div
                     key={group.name}
@@ -182,10 +180,13 @@ export default function HomePage(): React.JSX.Element {
                     onMouseEnter={() =>
                       setHoveredMuscle(group.name.toLowerCase())
                     }
+                    onTouchStart={() =>
+                      setHoveredMuscle(group.name.toLowerCase())
+                    }
                   >
                     <Link href={group.href}>
                       <motion.div
-                        className={`bg-gradient-to-r ${group.color} rounded-lg py-4 px-6 text-left shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-between`}
+                        className={`bg-gradient-to-r ${group.color} rounded-lg py-3 sm:py-4 px-4 sm:px-6 text-left shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-between touch-manipulation`}
                         variants={buttonVariants}
                         style={{
                           pointerEvents: 'auto',
@@ -196,10 +197,10 @@ export default function HomePage(): React.JSX.Element {
                               : 'none',
                         }}
                       >
-                        <span className='text-lg font-roboto-bold text-white'>
+                        <span className='text-base sm:text-lg font-roboto-bold text-white'>
                           {group.name}
                         </span>
-                        <ArrowRight className='w-5 h-5 text-white' />
+                        <ArrowRight className='w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0' />
                       </motion.div>
                     </Link>
                   </motion.div>
@@ -209,12 +210,12 @@ export default function HomePage(): React.JSX.Element {
 
             {/* Dynamic Body Diagram - Right Side */}
             <motion.div
-              className='flex-1 flex justify-center'
+              className='flex-1 flex justify-center xl:justify-end order-first xl:order-last'
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className='relative w-80 h-96'>
+              <div className='relative w-64 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-[28rem] max-w-full'>
                 {/* Default state - no specific muscle highlighted */}
                 {!hoveredMuscle && (
                   <motion.div
@@ -222,10 +223,18 @@ export default function HomePage(): React.JSX.Element {
                     animate={{ opacity: 1 }}
                     className='absolute inset-0 flex items-center justify-center'
                   >
-                    <div className='text-center text-white/70'>
-                      <div className='text-6xl mb-4'>👤</div>
-                      <p className='text-lg font-roboto-light'>
-                        Select a muscle group to see targeted exercises
+                    <div className='text-center text-white/70 px-4'>
+                      <div className='text-4xl sm:text-6xl mb-2 sm:mb-4'>
+                        👤
+                      </div>
+                      <p className='text-sm sm:text-lg font-roboto-light leading-relaxed'>
+                        <span className='portrait-only'>
+                          Tap a muscle group
+                        </span>
+                        <span className='landscape-only'>
+                          Select a muscle group
+                        </span>{' '}
+                        to see targeted exercises
                       </p>
                     </div>
                   </motion.div>
@@ -253,6 +262,7 @@ export default function HomePage(): React.JSX.Element {
                         alt={`${group.name} muscle diagram`}
                         fill
                         className='object-contain drop-shadow-2xl'
+                        sizes='(max-width: 640px) 256px, (max-width: 1024px) 320px, 384px'
                         style={{
                           filter: `${getColorFilter(
                             group.svgColor
